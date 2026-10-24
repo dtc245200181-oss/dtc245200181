@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <title>Quản lý thư viện</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <h1>Hệ thống quản lý thư viện</h1>
+  <nav>
+    <a href="{{ url_for('books') }}">Sách</a>
+    <a href="{{ url_for('members') }}">Độc giả</a>
+    <a href="{{ url_for('loans') }}">Mượn / Trả</a>
+  </nav>
+  {% for m in get_flashed_messages() %}<div class="flash">{{ m }}</div>{% endfor %}
+  {% block content %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Mượn sách</h2>
+<form method="post" action="{{ url_for('borrow') }}" class="row">
+  <select name="book_id" required>
+    {% for b in books %}<option value="{{ b.id }}">{{ b.title }} (còn {{ b.quantity }})</option>{% endfor %}
+  </select>
+  <select name="member_id" required>
+    {% for m in members %}<option value="{{ m.id }}">{{ m.full_name }}</option>{% endfor %}
+  </select>
+  <input name="days" type="number" min="1" max="60" value="14" required> ngày
+  <button>Mượn</button>
+</form>
+<h2>Phiếu mượn</h2>
+<table>
+  <tr><th>ID</th><th>Sách</th><th>Độc giả</th><th>Ngày mượn</th><th>Hạn trả</th><th>Đã trả</th><th></th></tr>
+  {% for l in loans %}
+  <tr class="{{ 'late' if not l.returned_at and l.due_date < today else '' }}">
+    <td>{{ l.id }}</td><td>{{ l.title }}</td><td>{{ l.full_name }}</td>
+    <td>{{ l.borrowed_at }}</td><td>{{ l.due_date }}</td><td>{{ l.returned_at or '' }}</td>
+    <td>{% if not l.returned_at %}
+      <form method="post" action="{{ url_for('return_book', loan_id=l.id) }}"><button>Trả sách</button></form>
+    {% endif %}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

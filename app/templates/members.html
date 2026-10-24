@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Độc giả</h2>
+<form method="post" action="{{ url_for('add_member') }}" class="row">
+  <input name="full_name" placeholder="Họ tên" required>
+  <input name="email" type="email" placeholder="Email">
+  <input name="phone" placeholder="Số điện thoại">
+  <button>Thêm độc giả</button>
+</form>
+<table>
+  <tr><th>ID</th><th>Họ tên</th><th>Email</th><th>SĐT</th><th></th></tr>
+  {% for m in members %}
+  <tr>
+    <td>{{ m.id }}</td><td>{{ m.full_name }}</td><td>{{ m.email or '' }}</td><td>{{ m.phone or '' }}</td>
+    <td><form method="post" action="{{ url_for('delete_member', member_id=m.id) }}"><button>Xóa</button></form></td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}
