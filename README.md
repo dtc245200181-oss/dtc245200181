@@ -59,7 +59,7 @@ docker compose ps
 
 | Dịch vụ | URL |
 |---|---|
-| Website thư viện | https://<IP> (trình duyệt cảnh báo chứng chỉ tự ký, chọn tiếp tục) |
+| Website thư viện | https://192.168.36.130 |
 | pgAdmin | http://<IP>:5050 (server: host `db`, port `5432`) |
 | Prometheus | http://<IP>:9090 |
 | Grafana | http://<IP>:3000 (user `admin`, mật khẩu `GRAFANA_ADMIN_PASSWORD`) |
